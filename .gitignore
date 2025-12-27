@@ -1,0 +1,6 @@
+# local variable secrets
+.env
+
+# All downloaded libraries, users can download this themselves to
+# save room
+node_modules/
