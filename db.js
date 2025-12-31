@@ -12,5 +12,15 @@ const pool = new Pool({
 
 // We export a helper function to run queries
 module.exports = {
-  query: (text, params) => pool.query(text, params),
+  // Use this for single queries (90% of your app)
+  query: async (text, params) => {
+    const start = Date.now();
+    const res = await pool.query(text, params);
+    const duration = Date.now() - start;
+    console.log('Executed Query:', { text, duration, rows: res.rowCount });
+    return res;
+  },
+
+  // Use this to check out a client for Transactions
+  connect: () => pool.connect() 
 };
